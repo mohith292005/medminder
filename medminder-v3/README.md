@@ -2,7 +2,7 @@
 
 > A full-stack medication management web app that helps patients track daily doses, get refill reminders, and check dangerous drug interactions using AI.
 
-[![Live Demo](https://img.shields.io/badge/Live_Demo-Visit-brightgreen?style=for-the-badge)](https://medminder.vercel.app)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Visit-brightgreen?style=for-the-badge)](https://medminder-inky.vercel.app/)
 ![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)
 ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
@@ -10,13 +10,6 @@
 ![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
 ![Render](https://img.shields.io/badge/Render-46E3B7?style=for-the-badge&logo=render&logoColor=white)
 
----
-
-## 🎬 Demo
-
-![MedMinder Demo](assets/demo.gif)
-
----
 
 ## 📸 Screenshots
 
@@ -130,7 +123,7 @@ medminder/
 
 **1. Clone the repo**
 ```bash
-git clone https://github.com/YOUR_USERNAME/medminder.git
+git clone https://github.com/mohith292005/medminder.git
 cd medminder
 ```
 
@@ -198,8 +191,8 @@ Full interactive docs at → http://localhost:8000/docs
 
 | Service | Purpose | URL |
 |---|---|---|
-| Vercel | Frontend | https://medminder.vercel.app |
-| Render | Backend API | https://medminder-api.onrender.com |
+| Vercel | Frontend | https://medminder-inky.vercel.app |
+| Render | Backend API | https://medminder-u38p.onrender.com |
 | Neon | PostgreSQL DB | neon.tech |
 
 ---
@@ -213,4 +206,4 @@ MedMinder is a portfolio project built for educational purposes. It is not a sub
 ## 👨‍💻 Author
 
 **Mohith** — Final Year CS Student
-[GitHub](https://github.com/YOUR_USERNAME) · [LinkedIn](https://linkedin.com/in/YOUR_USERNAME)
+[GitHub](https://github.com/mohith292005)
