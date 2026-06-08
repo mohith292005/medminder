@@ -6,6 +6,7 @@
 ![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)
 ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 ![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
 ![Render](https://img.shields.io/badge/Render-46E3B7?style=for-the-badge&logo=render&logoColor=white)
 
@@ -77,6 +78,7 @@ Over **125,000 deaths** occur annually in the US alone due to medication non-adh
 - **OpenRouter API** — routes to GPT-4o-mini for drug interaction analysis
 
 ### Deployment
+- **Docker** — containerised local development
 - **Vercel** — frontend hosting with CI/CD
 - **Render** — backend hosting with auto-deploy from GitHub
 - **Neon** — serverless PostgreSQL database
@@ -89,9 +91,9 @@ Over **125,000 deaths** occur annually in the US alone due to medication non-adh
 medminder/
 ├── backend/
 │   ├── app/
-│   │   ├── main.py          # FastAPI app + CORS
-│   │   ├── database.py      # PostgreSQL connection + table init
-│   │   ├── models.py        # Pydantic schemas
+│   │   ├── main.py              # FastAPI app + CORS
+│   │   ├── database.py          # PostgreSQL connection + table init
+│   │   ├── models.py            # Pydantic schemas
 │   │   └── routes/
 │   │       ├── medications.py   # CRUD endpoints
 │   │       ├── doses.py         # Dose toggle + streak
@@ -109,10 +111,12 @@ medminder/
 │   │   │   └── UI.jsx
 │   │   ├── hooks/
 │   │   │   └── useToast.js
-│   │   ├── api.js           # All backend fetch calls
+│   │   ├── api.js               # All backend fetch calls
 │   │   └── App.jsx
+│   ├── Dockerfile
 │   └── package.json
-├── assets/                  # Screenshots for README
+├── assets/                      # Screenshots for README
+├── docker-compose.yml
 └── README.md
 ```
 
@@ -120,44 +124,56 @@ medminder/
 
 ## 🚀 Run Locally
 
-### Prerequisites
-- Python 3.11+
-- Node.js 18+
-- A free [Neon](https://neon.tech) PostgreSQL database
+### Option A — Docker (Recommended, one command)
 
-### 1. Clone the repo
+**Prerequisites:** Install [Docker Desktop](https://www.docker.com/products/docker-desktop)
+
+**1. Clone the repo**
 ```bash
-git clone https://github.com/mohith292005/medminder.git
+git clone https://github.com/YOUR_USERNAME/medminder.git
 cd medminder
 ```
 
-### 2. Set up backend
-```bash
-cd backend
-pip install -r requirements.txt
-```
-
-Create a `.env` file inside `backend/`:
+**2. Create `backend/.env`**
 ```
 DATABASE_URL=postgresql://your-neon-url-here
 OPENROUTER_API_KEY=your-openrouter-key-here
 FRONTEND_URL=http://localhost:5173
 ```
 
-Start the backend:
+**3. Start everything**
 ```bash
+docker-compose up --build
+```
+
+- App → http://localhost:5173
+- API → http://localhost:8000
+- API Docs → http://localhost:8000/docs
+
+**Stop:**
+```bash
+docker-compose down
+```
+
+---
+
+### Option B — Manual (two terminals)
+
+**Prerequisites:** Python 3.11+, Node.js 18+
+
+**Terminal 1 — Backend**
+```bash
+cd backend
+pip install -r requirements.txt
 uvicorn app.main:app --reload
 ```
-API runs at → http://localhost:8000  
-API docs at → http://localhost:8000/docs
 
-### 3. Set up frontend
+**Terminal 2 — Frontend**
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
-App runs at → http://localhost:5173
 
 ---
 
@@ -174,14 +190,16 @@ App runs at → http://localhost:5173
 | GET | `/api/doses/streak/last7` | Get last 7 days streak |
 | POST | `/api/interactions/check` | AI drug interaction check |
 
+Full interactive docs at → http://localhost:8000/docs
+
 ---
 
 ## ☁️ Deployment
 
 | Service | Purpose | URL |
 |---|---|---|
-| Vercel | Frontend | https://medminder-beryl.vercel.app |
-| Render | Backend API | https://medminder-u38p.onrender.com |
+| Vercel | Frontend | https://medminder.vercel.app |
+| Render | Backend API | https://medminder-api.onrender.com |
 | Neon | PostgreSQL DB | neon.tech |
 
 ---
@@ -194,5 +212,5 @@ MedMinder is a portfolio project built for educational purposes. It is not a sub
 
 ## 👨‍💻 Author
 
-**Mohith** — Final Year CS Student  
-[GitHub](https://github.com/mohith292005)
+**Mohith** — Final Year CS Student
+[GitHub](https://github.com/YOUR_USERNAME) · [LinkedIn](https://linkedin.com/in/YOUR_USERNAME)
