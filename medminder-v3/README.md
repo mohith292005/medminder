@@ -1,81 +1,198 @@
-# MedMinder V3 — Full Stack (PostgreSQL + OpenRouter)
+# 💊 MedMinder
 
-## Local Setup
+> A full-stack medication management web app that helps patients track daily doses, get refill reminders, and check dangerous drug interactions using AI.
 
-### 1. Get a free PostgreSQL database from Neon
-1. Go to https://neon.tech and sign up free
-2. Create a new project → name it "medminder"
-3. Copy the connection string — looks like:
-   `postgresql://user:password@ep-xxx.us-east-2.aws.neon.tech/neondb?sslmode=require`
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Visit-brightgreen?style=for-the-badge)](https://medminder.vercel.app)
+![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
+![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
+![Render](https://img.shields.io/badge/Render-46E3B7?style=for-the-badge&logo=render&logoColor=white)
 
-### 2. Set up backend .env
-Edit `backend/.env` and fill in your values:
+---
+
+## 🎬 Demo
+
+![MedMinder Demo](assets/demo.gif)
+
+---
+
+## 📸 Screenshots
+
+### Dashboard — Daily progress & streak tracker
+![Dashboard](assets/dashboard.png)
+
+### Medications — Add, edit & manage your medications
+![Medications](assets/medications.png)
+
+### Schedule — Timeline view of your day
+![Schedule](assets/schedule.png)
+
+### AI Interaction Checker — Powered by GPT-4o-mini
+![Interactions](assets/interactions.png)
+
+---
+
+## 🚑 The Problem
+
+Over **125,000 deaths** occur annually in the US alone due to medication non-adherence. Patients managing multiple medications struggle with:
+
+- Forgetting doses or accidentally double-dosing
+- Not knowing dangerous drug-drug interactions
+- Missing refill deadlines
+- No simple tool that does all of this in one place
+
+**MedMinder solves this.**
+
+---
+
+## ✨ Features
+
+| Feature | Description |
+|---|---|
+| 💊 Medication Management | Add, edit, delete medications with dose, frequency and schedule |
+| ✅ Dose Tracking | Mark doses as taken, progress ring updates in real time |
+| 🗓️ Daily Schedule | Timeline view organised by time of day |
+| 🤖 AI Interaction Checker | Detects major, moderate and minor drug interactions using AI |
+| ⚠️ Refill Reminders | Alerts when pill count drops to 7 or below |
+| 🔥 Streak Tracker | 7-day adherence calendar to build healthy habits |
+| 💾 Persistent Storage | All data saved to PostgreSQL — never lost on refresh |
+
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+- **React 18** — component-based UI
+- **Vite** — fast dev server and build tool
+- **Vanilla CSS** — custom design system, no UI library
+
+### Backend
+- **FastAPI** — high-performance Python API framework
+- **PostgreSQL** — production-grade relational database (hosted on Neon)
+- **psycopg2** — PostgreSQL adapter for Python
+- **python-dotenv** — environment variable management
+
+### AI
+- **OpenRouter API** — routes to GPT-4o-mini for drug interaction analysis
+
+### Deployment
+- **Vercel** — frontend hosting with CI/CD
+- **Render** — backend hosting with auto-deploy from GitHub
+- **Neon** — serverless PostgreSQL database
+
+---
+
+## 📁 Project Structure
+
 ```
-DATABASE_URL=postgresql://your-neon-url-here
-OPENROUTER_API_KEY=sk-or-v1-your-key-here
-FRONTEND_URL=http://localhost:5173
+medminder/
+├── backend/
+│   ├── app/
+│   │   ├── main.py          # FastAPI app + CORS
+│   │   ├── database.py      # PostgreSQL connection + table init
+│   │   ├── models.py        # Pydantic schemas
+│   │   └── routes/
+│   │       ├── medications.py   # CRUD endpoints
+│   │       ├── doses.py         # Dose toggle + streak
+│   │       └── interactions.py  # AI interaction checker
+│   ├── requirements.txt
+│   └── Dockerfile
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── Dashboard.jsx
+│   │   │   ├── Medications.jsx
+│   │   │   ├── Schedule.jsx
+│   │   │   ├── Interactions.jsx
+│   │   │   ├── Navbar.jsx
+│   │   │   └── UI.jsx
+│   │   ├── hooks/
+│   │   │   └── useToast.js
+│   │   ├── api.js           # All backend fetch calls
+│   │   └── App.jsx
+│   └── package.json
+├── assets/                  # Screenshots for README
+└── README.md
 ```
 
-### 3. Run backend
+---
+
+## 🚀 Run Locally
+
+### Prerequisites
+- Python 3.11+
+- Node.js 18+
+- A free [Neon](https://neon.tech) PostgreSQL database
+
+### 1. Clone the repo
+```bash
+git clone https://github.com/mohith292005/medminder.git
+cd medminder
+```
+
+### 2. Set up backend
 ```bash
 cd backend
 pip install -r requirements.txt
+```
+
+Create a `.env` file inside `backend/`:
+```
+DATABASE_URL=postgresql://your-neon-url-here
+OPENROUTER_API_KEY=your-openrouter-key-here
+FRONTEND_URL=http://localhost:5173
+```
+
+Start the backend:
+```bash
 uvicorn app.main:app --reload
 ```
-Test at: http://localhost:8000/docs
+API runs at → http://localhost:8000  
+API docs at → http://localhost:8000/docs
 
-### 4. Run frontend
+### 3. Set up frontend
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
-Open: http://localhost:5173
+App runs at → http://localhost:5173
 
 ---
 
-## Deploy to Production
+## 🌐 API Endpoints
 
-### Step 1 — Push to GitHub
-```bash
-git init
-git add .
-git commit -m "MedMinder v3"
-git remote add origin https://github.com/YOUR_USERNAME/medminder.git
-git push -u origin main
-```
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/medications/` | List all medications |
+| POST | `/api/medications/` | Add a medication |
+| PUT | `/api/medications/{id}` | Update a medication |
+| DELETE | `/api/medications/{id}` | Delete a medication |
+| GET | `/api/doses/{date}` | Get doses for a date |
+| POST | `/api/doses/toggle` | Toggle dose taken/untaken |
+| GET | `/api/doses/streak/last7` | Get last 7 days streak |
+| POST | `/api/interactions/check` | AI drug interaction check |
 
-### Step 2 — Deploy Backend to Render
-1. Go to render.com → New Web Service
-2. Connect your GitHub repo
-3. Settings:
-   - Root Directory: `backend`
-   - Runtime: Python 3
-   - Build Command: `pip install -r requirements.txt`
-   - Start Command: `uvicorn app.main:app --host 0.0.0.0 --port $PORT`
-4. Environment Variables (add all three):
-   - `DATABASE_URL` = your Neon connection string
-   - `OPENROUTER_API_KEY` = your OpenRouter key
-   - `FRONTEND_URL` = https://your-app.vercel.app (add after Vercel deploy)
-5. Deploy → copy your Render URL
+---
 
-### Step 3 — Deploy Frontend to Vercel
-1. Go to vercel.com → New Project → import your repo
-2. Settings:
-   - Root Directory: `frontend`
-   - Framework: Vite
-3. Environment Variables:
-   - `VITE_API_URL` = https://your-app.onrender.com
-4. Deploy → copy your Vercel URL
+## ☁️ Deployment
 
-### Step 4 — Fix CORS (final step)
-1. Go to Render dashboard → your service → Environment
-2. Update `FRONTEND_URL` = https://your-app.vercel.app
-3. Click Save → Render redeploys automatically
+| Service | Purpose | URL |
+|---|---|---|
+| Vercel | Frontend | https://medminder-beryl.vercel.app |
+| Render | Backend API | https://medminder-u38p.onrender.com |
+| Neon | PostgreSQL DB | neon.tech |
 
-### Step 5 — Keep backend awake (UptimeRobot)
-1. Go to uptimerobot.com → sign up free
-2. New Monitor → HTTP(s)
-3. URL: https://your-app.onrender.com
-4. Interval: every 5 minutes
-5. Save — backend never sleeps again
+---
+
+## ⚕️ Disclaimer
+
+MedMinder is a portfolio project built for educational purposes. It is not a substitute for professional medical advice. Always consult your pharmacist or physician before making changes to your medication regimen.
+
+---
+
+## 👨‍💻 Author
+
+**Mohith** — Final Year CS Student  
+[GitHub](https://github.com/mohith292005)
