@@ -1,0 +1,46 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #f7f4ef;
+  --surface: #ffffff;
+  --surface2: #f0ece4;
+  --border: #e2ddd5;
+  --text: #1a1714;
+  --muted: #7a7068;
+  --danger: #c0392b;
+  --danger-bg: #fdf0ee;
+  --danger-border: #f5c6c2;
+  --warn: #b5660a;
+  --warn-bg: #fef8f0;
+  --warn-border: #fad9ab;
+  --ok: #1a6b3c;
+  --ok-bg: #eef7f2;
+  --ok-border: #a8dfc0;
+  --accent: #2c5f8a;
+  --accent-light: #e8f1f8;
+  --accent-border: #b8d4eb;
+  --ff-display: 'Fraunces', Georgia, serif;
+  --ff-body: 'Instrument Sans', system-ui, sans-serif;
+  --r: 10px;
+  --r-lg: 16px;
+  --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--ff-body);
+  font-weight: 300;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+button { font-family: var(--ff-body); cursor: pointer; border: none; outline: none; }
+input, select { font-family: var(--ff-body); outline: none; }
+::selection { background: #b8d4eb; color: #1a1714; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fadeUp 0.35s ease forwards; }
